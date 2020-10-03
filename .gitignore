@@ -27,8 +27,8 @@ bld/
 [Oo]bj/
 [Ll]og/
 
-[Gg][Cc]Launcher/[Gg]ames/
-[Tt]est[Dd]ownloads/
+[Gg][Cc]Launcher/[Gg]ames/*
+[Tt]est[Dd]ownloads/*
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
