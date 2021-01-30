@@ -40,8 +40,8 @@ Public Class Main
         Launcher.name = "French Pixel Launcher"
         Launcher.FullName = "French Pixel Launcher"
         Launcher.id = 0
-        Launcher.downloadURL = "https://github.com/GCJOJO/gcjojo.github.io/releases/latest/download/FrenchPixelLauncher.exe"
-        Launcher.versionURL = "https://github.com/GCJOJO/gcjojo.github.io/releases/latest/download/FPL_WebVersion"
+        Launcher.downloadURL = "https://github.com/GCJOJO/FrenchPixelLauncher/releases/latest/download/FrenchPixelLauncher.exe"
+        Launcher.versionURL = "https://github.com/GCJOJO/FrenchPixelLauncher/releases/latest/download/FPL_WebVersion"
 
         Try
             Dim COZPathReader As String
@@ -84,7 +84,7 @@ Public Class Main
         End Try
 
         If Not System.IO.File.Exists(directoryPath + "\updater.bat") Then
-            wClient.DownloadFile(New Uri("https://github.com/GCJOJO/gcjojo.github.io/releases/latest/download/updater.bat"), directoryPath + "\updater.bat")
+            wClient.DownloadFile(New Uri("https://github.com/GCJOJO/FrenchPixelLauncher/releases/latest/download/updater.bat"), directoryPath + "\updater.bat")
         End If
         If System.IO.File.Exists(directoryPath + "\CurrentVersion") Then
             CheckLauncherVersion(Launcher)
