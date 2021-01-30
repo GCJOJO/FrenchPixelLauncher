@@ -40,6 +40,9 @@ Partial Class Main
         Me.DownloadDungeonEditorSrc = New System.Windows.Forms.Button()
         Me.DownloadCOZSrc = New System.Windows.Forms.Button()
         Me.COZDownloadServer = New System.Windows.Forms.Button()
+        Me.UpdateLauncher = New System.Windows.Forms.Button()
+        Me.UpdateDE = New System.Windows.Forms.Button()
+        Me.UpdateCOZ = New System.Windows.Forms.Button()
         CType(Me.COZBanner, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -109,7 +112,7 @@ Partial Class Main
         'UpdatedTimer
         '
         Me.UpdatedTimer.Enabled = True
-        Me.UpdatedTimer.Interval = 300000
+        Me.UpdatedTimer.Interval = 5000
         '
         'PictureBox1
         '
@@ -183,12 +186,46 @@ Partial Class Main
         Me.COZDownloadServer.UseVisualStyleBackColor = True
         Me.COZDownloadServer.Visible = False
         '
+        'UpdateLauncher
+        '
+        Me.UpdateLauncher.Location = New System.Drawing.Point(1077, 620)
+        Me.UpdateLauncher.Name = "UpdateLauncher"
+        Me.UpdateLauncher.Size = New System.Drawing.Size(175, 49)
+        Me.UpdateLauncher.TabIndex = 12
+        Me.UpdateLauncher.Text = "Chercher une mise à jour"
+        Me.UpdateLauncher.UseVisualStyleBackColor = True
+        '
+        'UpdateDE
+        '
+        Me.UpdateDE.Enabled = False
+        Me.UpdateDE.Location = New System.Drawing.Point(405, 294)
+        Me.UpdateDE.Name = "UpdateDE"
+        Me.UpdateDE.Size = New System.Drawing.Size(231, 32)
+        Me.UpdateDE.TabIndex = 13
+        Me.UpdateDE.Text = "Mettre à jour"
+        Me.UpdateDE.UseVisualStyleBackColor = True
+        Me.UpdateDE.Visible = False
+        '
+        'UpdateCOZ
+        '
+        Me.UpdateCOZ.Enabled = False
+        Me.UpdateCOZ.Location = New System.Drawing.Point(31, 332)
+        Me.UpdateCOZ.Name = "UpdateCOZ"
+        Me.UpdateCOZ.Size = New System.Drawing.Size(231, 32)
+        Me.UpdateCOZ.TabIndex = 14
+        Me.UpdateCOZ.Text = "Mettre à jour"
+        Me.UpdateCOZ.UseVisualStyleBackColor = True
+        Me.UpdateCOZ.Visible = False
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(25, Byte), Integer), CType(CType(25, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1264, 681)
+        Me.Controls.Add(Me.UpdateCOZ)
+        Me.Controls.Add(Me.UpdateDE)
+        Me.Controls.Add(Me.UpdateLauncher)
         Me.Controls.Add(Me.COZDownloadServer)
         Me.Controls.Add(Me.DownloadCOZSrc)
         Me.Controls.Add(Me.DownloadDungeonEditorSrc)
@@ -226,4 +263,7 @@ Partial Class Main
     Friend WithEvents DownloadDungeonEditorSrc As Button
     Friend WithEvents DownloadCOZSrc As Button
     Friend WithEvents COZDownloadServer As Button
+    Friend WithEvents UpdateLauncher As Button
+    Friend WithEvents UpdateDE As Button
+    Friend WithEvents UpdateCOZ As Button
 End Class
