@@ -1,0 +1,19 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoUpdater"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1280" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="46*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Fill="#FF404040" HorizontalAlignment="Left" Height="689" VerticalAlignment="Top" Width="1272" Stroke="Black" Grid.ColumnSpan="2"/>
+        <ProgressBar x:Name="DownloadProgressBar" HorizontalAlignment="Left" Height="55" Margin="60,477,0,0" VerticalAlignment="Top" Width="1150" Value="50" Cursor="Arrow" Grid.ColumnSpan="2" AutomationProperties.Name="DownloadProgressBar"/>
+        <Label x:Name="DownloadText" Content="Téléchargement..." Height="78" Margin="444,269,0,0" Width="400" FontSize="50" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+    </Grid>
+</Window>

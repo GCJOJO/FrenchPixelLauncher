@@ -43,6 +43,8 @@ Partial Class Main
         Me.UpdateLauncher = New System.Windows.Forms.Button()
         Me.UpdateDE = New System.Windows.Forms.Button()
         Me.UpdateCOZ = New System.Windows.Forms.Button()
+        Me.DEDownloadBar = New System.Windows.Forms.ProgressBar()
+        Me.COZDownloadBar = New System.Windows.Forms.ProgressBar()
         CType(Me.COZBanner, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -217,12 +219,28 @@ Partial Class Main
         Me.UpdateCOZ.UseVisualStyleBackColor = True
         Me.UpdateCOZ.Visible = False
         '
+        'DEDownloadBar
+        '
+        Me.DEDownloadBar.Location = New System.Drawing.Point(380, 438)
+        Me.DEDownloadBar.Name = "DEDownloadBar"
+        Me.DEDownloadBar.Size = New System.Drawing.Size(256, 32)
+        Me.DEDownloadBar.TabIndex = 15
+        '
+        'COZDownloadBar
+        '
+        Me.COZDownloadBar.Location = New System.Drawing.Point(6, 438)
+        Me.COZDownloadBar.Name = "COZDownloadBar"
+        Me.COZDownloadBar.Size = New System.Drawing.Size(256, 32)
+        Me.COZDownloadBar.TabIndex = 16
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(25, Byte), Integer), CType(CType(25, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1264, 681)
+        Me.Controls.Add(Me.COZDownloadBar)
+        Me.Controls.Add(Me.DEDownloadBar)
         Me.Controls.Add(Me.UpdateCOZ)
         Me.Controls.Add(Me.UpdateDE)
         Me.Controls.Add(Me.UpdateLauncher)
@@ -266,4 +284,6 @@ Partial Class Main
     Friend WithEvents UpdateLauncher As Button
     Friend WithEvents UpdateDE As Button
     Friend WithEvents UpdateCOZ As Button
+    Friend WithEvents DEDownloadBar As ProgressBar
+    Friend WithEvents COZDownloadBar As ProgressBar
 End Class
