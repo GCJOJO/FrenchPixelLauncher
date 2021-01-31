@@ -256,6 +256,7 @@ Partial Class Main
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.COZPath)
         Me.Controls.Add(Me.COZBanner)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Main"
         Me.Text = "FrenchPixelLauncher"
         CType(Me.COZBanner, System.ComponentModel.ISupportInitialize).EndInit()
