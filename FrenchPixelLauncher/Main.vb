@@ -100,7 +100,7 @@ Public Class Main
         Else
             System.IO.File.Create(directoryPath + "\CurrentVersion")
             System.IO.File.WriteAllText(directoryPath + "\CurrentVersion", "1.0.0")
-            'CheckLauncherVersion(Launcher)
+            CheckLauncherVersion(Launcher)
         End If
     End Sub
 
