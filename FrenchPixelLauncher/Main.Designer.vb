@@ -33,7 +33,7 @@ Partial Class Main
         Me.Btn_COZ_Options = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.UpdatedTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.DEImage = New System.Windows.Forms.PictureBox()
         Me.BTN_DungeonEditor = New System.Windows.Forms.Button()
         Me.OptionDE = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -46,7 +46,7 @@ Partial Class Main
         Me.DEDownloadBar = New System.Windows.Forms.ProgressBar()
         Me.COZDownloadBar = New System.Windows.Forms.ProgressBar()
         CType(Me.COZBanner, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'COZBanner
@@ -116,15 +116,15 @@ Partial Class Main
         Me.UpdatedTimer.Enabled = True
         Me.UpdatedTimer.Interval = 5000
         '
-        'PictureBox1
+        'DEImage
         '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(405, 27)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(218, 226)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 5
-        Me.PictureBox1.TabStop = False
+        Me.DEImage.Image = CType(resources.GetObject("DEImage.Image"), System.Drawing.Image)
+        Me.DEImage.Location = New System.Drawing.Point(405, 27)
+        Me.DEImage.Name = "DEImage"
+        Me.DEImage.Size = New System.Drawing.Size(218, 226)
+        Me.DEImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.DEImage.TabIndex = 5
+        Me.DEImage.TabStop = False
         '
         'BTN_DungeonEditor
         '
@@ -250,7 +250,7 @@ Partial Class Main
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.BTN_DungeonEditor)
         Me.Controls.Add(Me.OptionDE)
-        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.DEImage)
         Me.Controls.Add(Me.COZBtn)
         Me.Controls.Add(Me.Btn_COZ_Options)
         Me.Controls.Add(Me.Label1)
@@ -260,7 +260,7 @@ Partial Class Main
         Me.Name = "Main"
         Me.Text = "FrenchPixelLauncher"
         CType(Me.COZBanner, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -275,7 +275,7 @@ Partial Class Main
     Friend WithEvents Btn_COZ_Options As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents UpdatedTimer As Timer
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents DEImage As PictureBox
     Friend WithEvents BTN_DungeonEditor As Button
     Friend WithEvents OptionDE As Button
     Friend WithEvents Label2 As Label

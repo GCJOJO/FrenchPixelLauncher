@@ -96,11 +96,11 @@ Public Class Main
             wClient.DownloadFile(New Uri("https://github.com/GCJOJO/FrenchPixelLauncher/releases/latest/download/AutoUpdater.exe"), directoryPath + "\AutoUpdater.exe")
         End If
         If System.IO.File.Exists(directoryPath + "\CurrentVersion") Then
-            CheckLauncherVersion(Launcher)
+            CheckLauncherVersion(Launcher, False)
         Else
             System.IO.File.Create(directoryPath + "\CurrentVersion")
             System.IO.File.WriteAllText(directoryPath + "\CurrentVersion", "1.0.0")
-            CheckLauncherVersion(Launcher)
+            CheckLauncherVersion(Launcher, True)
         End If
     End Sub
 
@@ -167,7 +167,7 @@ Public Class Main
     End Sub
 
 
-    Public Function CheckLauncherVersion(LauncherRef As Game) As Boolean
+    Public Function CheckLauncherVersion(LauncherRef As Game, AutoUpdate As Boolean) As Boolean
         'Process.Start("cmd.exe", "cd /d " & Application.StartupPath & " & pause")
         'Process.Start("cmd.exe", "title French Pixel Download & cd /d " & Application.StartupPath & " & pause")
         'Process.Start("cmd.exe", "cd " & directoryPath & " & del FrenchPixelLauncher.exe & ren FPL_Update FrenchPixelLauncher.exe & del CurrentVersion & ren FPL_WebVersion CurrentVersion & pause")
@@ -180,9 +180,12 @@ Public Class Main
         If CompareFiles(directoryPath & "\CurrentVersion", directoryPath & "\FPL_WebVersion") Then
             Return True
         Else
-            'wClient.DownloadFile(New Uri(LauncherRef.downloadURL), directoryPath + "\FPL_Update")
-            Process.Start(directoryPath + "\AutoUpdater.exe")
-            Close()
+            If AutoUpdate Then
+                'wClient.DownloadFile(New Uri(LauncherRef.downloadURL), directoryPath + "\FPL_Update")
+                Process.Start(directoryPath + "\AutoUpdater.exe")
+                Close()
+                Return True
+            End If
             Return False
         End If
         Return False
@@ -313,7 +316,7 @@ Public Class Main
     End Sub
 
     Private Sub UpdateLauncher_Click(sender As Object, e As EventArgs) Handles UpdateLauncher.Click
-        CheckLauncherVersion(Launcher)
+        CheckLauncherVersion(Launcher, True)
     End Sub
 
     Private Sub BTNUpdateDE(sender As Object, e As EventArgs) Handles UpdateDE.Click
@@ -435,6 +438,16 @@ Public Class Main
         'Process.Start("cmd.exe", "/c title French Pixel Download - " & DownloadedGame.FullName & "& echo [1m[32m[4mBienvenue dans l'interface de téléchargement du French Pixel Launcheur (oui on utilise cmd.exe)[0m & cd /d " & DownloadPath.SelectedPath & "\ & curl -L " & DownloadedGame.url & " -o" & DownloadPath.SelectedPath & "\" & DownloadedGame.name & ".zip & tar -xf " & DownloadPath.SelectedPath & "\" & DownloadedGame.name & ".zip -C" & DownloadPath.SelectedPath & " & ren " & DownloadPath.SelectedPath & "\WindowsNoEditor " & GameRef.FullName & " & exit")
         Process.Start("cmd.exe", "/c title French Pixel Download - " & DownloadedGame.FullName & "& echo [1m[32m[4mBienvenue dans l'interface de téléchargement du French Pixel Launcheur (oui on utilise cmd.exe)[0m & cd /d " & DownloadPath.SelectedPath & "\ & tar -xf " & DownloadPath.SelectedPath & "\" & DownloadedGame.name & ".zip -C" & DownloadPath.SelectedPath & " & ren " & DownloadPath.SelectedPath & "\WindowsNoEditor " & DownloadedGame.FullName)
         CanDownload = True
+    End Sub
+
+    Private Sub DEImage_Click(sender As Object, e As EventArgs) Handles DEImage.Click
+        Dim webAddress As String = "https://gcjojo.github.io/DungeonEditor"
+        Process.Start(webAddress)
+    End Sub
+
+    Private Sub COZImage_Click(sender As Object, e As EventArgs) Handles COZBanner.Click
+        Dim webAddress As String = "https://gcjojo.github.io/"
+        Process.Start(webAddress)
     End Sub
 End Class
 'Shell("cmd.exe /c " + COZDownloadPath.SelectedPath, AppWinStyle.Hide)
