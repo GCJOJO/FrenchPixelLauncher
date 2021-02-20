@@ -28,6 +28,8 @@ Public Class Main
     Dim DownloadedGame As Game
 
     Dim CurrentDownloadBar As ProgressBar
+    Dim DLUpdate As Boolean = False
+    Dim UpdatePath As String
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -203,6 +205,7 @@ Public Class Main
                 PathWriter.Write(DownloadPath.SelectedPath & "\" & GameRef.FullName & "\" & GameRef.name & ".exe")
                 PathWriter.Close()
 
+                DLUpdate = False
                 CurrentDownloadBar = GameRef.DownloadBarRef
                 DownloadedGame = GameRef
 
@@ -234,12 +237,39 @@ Public Class Main
             Return True
         Else
             'wClient.DownloadFile(New Uri(GameRef.downloadURL), GameDirectory + "\" + GameRef.name + "_Update")
-            Dim DLCmd = Process.Start("cmd.exe", "/c title " + GameRef.FullName + " Updater & cd " + GameDirectory + " & curl -L " & GameRef.downloadURL & " -o " + GameDirectory + "\" + GameRef.name + "_update & ren " + GameRef.name + "_update " + GameRef.name + "_update.zip & pause")
+            'Dim DLCmd = Process.Start("cmd.exe", "/c title " + GameRef.FullName + " Updater & cd " + GameDirectory + " & curl -L " & GameRef.downloadURL & " -o " + GameDirectory + "\" + GameRef.name + "_update & ren " + GameRef.name + "_update " + GameRef.name + "_update.zip & pause")
             'Process.Start("cmd.exe", "cd " & directoryPath & " & del FrenchPixelLauncher.exe & ren FPL_Update FrenchPixelLauncher.exe & del CurrentVersion & ren FPL_WebVersion CurrentVersion & pause")
             'Process.Start("cmd.exe", "/c title FPL Updater & cd " & GameDirectory & " & update.bat")
             'Dim Cmd As Process = Process.Start("cmd.exe", "cd " & directoryPath & " & del FrenchPixelLauncher.exe & ren FPL_Update FrenchPixelLauncher.exe & del CurrentVersion & ren FPL_WebVersion CurrentVersion & pause")
             'Cmd.WaitForExit(0)
             'Process.Start("cmd.exe", "title French Pixel Download & cd /d " & Application.StartupPath & "\ & curl -L " & LauncherRef.downloadURL & " -o " & Application.ExecutablePath & " & pause")
+
+            Dim GameExePath As String = My.Computer.FileSystem.ReadAllText(Application.StartupPath & "\" & GameRef.name & "Path.txt")
+            Dim GamePathReader As String = Replace(GameExePath, GameRef.name + ".exe", "")
+            Dim CMD As Process = Process.Start("cmd.exe", "/c del /q /f /s " & GamePathReader)
+
+            Dim AsNotExited As Boolean = True
+            While AsNotExited
+                If CMD.HasExited Then
+                    AsNotExited = False
+                    If CanDownload Then
+                        CanDownload = False
+                        Dim url As String = GameRef.downloadURL
+                        wClient.DownloadFileTaskAsync(New Uri(GameRef.downloadURL), GamePathReader + ".zip")
+
+                        UpdatePath = GamePathReader
+                        DLUpdate = True
+                        CurrentDownloadBar = GameRef.DownloadBarRef
+                        DownloadedGame = GameRef
+
+                        Return True
+                    Else
+                        Return False
+                    End If
+                End If
+            End While
+            'Process.Start("cmd.exe", "/c title " & GamePathReader & " & pause")
+
             Return False
         End If
     End Function
@@ -432,12 +462,22 @@ Public Class Main
     End Sub
 
     Private Sub wClient_DownloadFileCompleted(sender As Object, e As AsyncCompletedEventArgs) Handles wClient.DownloadFileCompleted
-        CurrentDownloadBar.Maximum = 100
-        CurrentDownloadBar.Value = 0
-        MsgBox("Le jeu à été télécharger !", MsgBoxStyle.Information)
-        'Process.Start("cmd.exe", "/c title French Pixel Download - " & DownloadedGame.FullName & "& echo [1m[32m[4mBienvenue dans l'interface de téléchargement du French Pixel Launcheur (oui on utilise cmd.exe)[0m & cd /d " & DownloadPath.SelectedPath & "\ & curl -L " & DownloadedGame.url & " -o" & DownloadPath.SelectedPath & "\" & DownloadedGame.name & ".zip & tar -xf " & DownloadPath.SelectedPath & "\" & DownloadedGame.name & ".zip -C" & DownloadPath.SelectedPath & " & ren " & DownloadPath.SelectedPath & "\WindowsNoEditor " & GameRef.FullName & " & exit")
-        Process.Start("cmd.exe", "/c title French Pixel Download - " & DownloadedGame.FullName & "& echo [1m[32m[4mBienvenue dans l'interface de téléchargement du French Pixel Launcheur (oui on utilise cmd.exe)[0m & cd /d " & DownloadPath.SelectedPath & "\ & tar -xf " & DownloadPath.SelectedPath & "\" & DownloadedGame.name & ".zip -C" & DownloadPath.SelectedPath & " & ren " & DownloadPath.SelectedPath & "\WindowsNoEditor " & DownloadedGame.FullName)
-        CanDownload = True
+        If DLUpdate Then
+            CurrentDownloadBar.Maximum = 100
+            CurrentDownloadBar.Value = 0
+            MsgBox("Le jeu à été télécharger !", MsgBoxStyle.Information)
+            'Process.Start("cmd.exe", "/c title French Pixel Download - " & DownloadedGame.FullName & "& echo [1m[32m[4mBienvenue dans l'interface de téléchargement du French Pixel Launcheur (oui on utilise cmd.exe)[0m & cd /d " & DownloadPath.SelectedPath & "\ & curl -L " & DownloadedGame.url & " -o" & DownloadPath.SelectedPath & "\" & DownloadedGame.name & ".zip & tar -xf " & DownloadPath.SelectedPath & "\" & DownloadedGame.name & ".zip -C" & DownloadPath.SelectedPath & " & ren " & DownloadPath.SelectedPath & "\WindowsNoEditor " & GameRef.FullName & " & exit")
+            Process.Start("cmd.exe", "/c title French Pixel Download - " & DownloadedGame.FullName & "& echo [1m[32m[4mBienvenue dans l'interface de téléchargement du French Pixel Launcheur (oui on utilise cmd.exe)[0m & cd /d " & UpdatePath & "\ & tar -xf " & UpdatePath & "\" & DownloadedGame.name & ".zip -C" & UpdatePath & " & ren " & UpdatePath & "\WindowsNoEditor " & DownloadedGame.FullName)
+            CanDownload = True
+        Else
+            CurrentDownloadBar.Maximum = 100
+            CurrentDownloadBar.Value = 0
+            MsgBox("Le jeu à été télécharger !", MsgBoxStyle.Information)
+            'Process.Start("cmd.exe", "/c title French Pixel Download - " & DownloadedGame.FullName & "& echo [1m[32m[4mBienvenue dans l'interface de téléchargement du French Pixel Launcheur (oui on utilise cmd.exe)[0m & cd /d " & DownloadPath.SelectedPath & "\ & curl -L " & DownloadedGame.url & " -o" & DownloadPath.SelectedPath & "\" & DownloadedGame.name & ".zip & tar -xf " & DownloadPath.SelectedPath & "\" & DownloadedGame.name & ".zip -C" & DownloadPath.SelectedPath & " & ren " & DownloadPath.SelectedPath & "\WindowsNoEditor " & GameRef.FullName & " & exit")
+            Process.Start("cmd.exe", "/c title French Pixel Download - " & DownloadedGame.FullName & "& echo [1m[32m[4mBienvenue dans l'interface de téléchargement du French Pixel Launcheur (oui on utilise cmd.exe)[0m & cd /d " & DownloadPath.SelectedPath & "\ & tar -xf " & DownloadPath.SelectedPath & "\" & DownloadedGame.name & ".zip -C" & DownloadPath.SelectedPath & " & ren " & DownloadPath.SelectedPath & "\WindowsNoEditor " & DownloadedGame.FullName)
+            CanDownload = True
+        End If
+
     End Sub
 
     Private Sub DEImage_Click(sender As Object, e As EventArgs) Handles DEImage.Click
