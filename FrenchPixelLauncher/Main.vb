@@ -328,12 +328,16 @@ Public Class Main
             DownloadCOZSrc.Visible = False
             COZDownloadServer.Visible = False
             COZDownloadServer.Enabled = False
+            UpdateCOZ.Visible = False
+            UpdateCOZ.Enabled = False
         Else
             isCOZOptions = True
             DownloadCOZSrc.Enabled = True
             DownloadCOZSrc.Visible = True
             COZDownloadServer.Visible = True
             COZDownloadServer.Enabled = True
+            UpdateCOZ.Visible = True
+            UpdateCOZ.Enabled = True
         End If
     End Sub
 
@@ -351,6 +355,10 @@ Public Class Main
 
     Private Sub BTNUpdateDE(sender As Object, e As EventArgs) Handles UpdateDE.Click
         UpdateGame(DungeonEditor)
+    End Sub
+
+    Private Sub UpdateCOZ_Click(sender As Object, e As EventArgs) Handles UpdateCOZ.Click
+        UpdateGame(COZ)
     End Sub
 
     'Private Sub UpdateDE(sender As Object, e As EventArgs)
